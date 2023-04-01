@@ -20,7 +20,7 @@ import java.time.LocalDateTime;
 @EntityListeners(AuditingEntityListener.class)
 @EqualsAndHashCode(of = {"id"})
 @Builder
-@NoArgsConstructor
+@NoArgsConstructor(force = true)
 @RequiredArgsConstructor
 @AllArgsConstructor
 @ToString
