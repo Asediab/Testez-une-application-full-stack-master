@@ -27,8 +27,6 @@ class TeacherControllerTest {
     @MockBean
     private TeacherService teacherService;
     @Autowired
-    private TeacherMapper teacherMapper;
-    @Autowired
     private TeacherController teacherController;
 
     private Teacher teacher;

@@ -4,14 +4,14 @@ import com.openclassrooms.starterjwt.models.User;
 import com.openclassrooms.starterjwt.security.services.UserDetailsImpl;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
-import org.aspectj.lang.annotation.Before;
-import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.test.util.ReflectionTestUtils;
 
 import java.time.LocalDateTime;
@@ -27,10 +27,10 @@ class JwtUtilsTest {
     @InjectMocks
     private JwtUtils jwtUtils;
 
-    private String email = "yoga@yoga.com";
-    private String firstName = "user";
-    private String lastName = "user";
-    private String password = "test!1234";
+    private final String email = "yoga@yoga.com";
+    private final String firstName = "user";
+    private final String lastName = "user";
+    private final String password = "test!1234";
     private User user;
     private UserDetailsImpl userDetailsImpl;
     private static final String JWT_SECRET = "openclassrooms";
@@ -72,6 +72,8 @@ class JwtUtilsTest {
     @Test
     @DisplayName("Test validateJwtToken Token is mal Formed")
     void testValidateJwtTokenIsMalformed() {
+        ReflectionTestUtils.setField(jwtUtils, "jwtSecret", JWT_SECRET);
+        ReflectionTestUtils.setField(jwtUtils, "jwtExpirationMs", JWT_EXPIRATION_MS);
         doReturn(userDetailsImpl).when(authentication).getPrincipal();
 
         Assertions.assertFalse(jwtUtils.validateJwtToken("malFormedToken"));
@@ -101,6 +103,20 @@ class JwtUtilsTest {
         String token = jwtUtils.generateJwtToken(authentication);
 
         Assertions.assertFalse(jwtUtils.validateJwtToken(""));
+    }
+
+    @Test
+    @DisplayName("Test validateJwtToken signature not valid")
+    void testValidateJwtTokenNotValidSignature() {
+        ReflectionTestUtils.setField(jwtUtils, "jwtSecret", JWT_SECRET);
+        ReflectionTestUtils.setField(jwtUtils, "jwtExpirationMs", JWT_EXPIRATION_MS);
+
+        String token = Jwts.builder().setSubject(userDetailsImpl.getUsername())
+                .setIssuedAt(new Date())
+                .setExpiration(new Date(System.currentTimeMillis() + JWT_EXPIRATION_MS))
+                .signWith(SignatureAlgorithm.HS512, "notValidSecret").compact();
+
+        Assertions.assertFalse(jwtUtils.validateJwtToken(token));
     }
 
 }

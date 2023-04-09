@@ -42,8 +42,8 @@ class AuthTokenFilterTest {
     @InjectMocks
     private AuthTokenFilter authTokenFilter;
 
-    private User user = new User("user", "", new ArrayList<>());
-    private UserDetails userDetails = user;
+    private final User user = new User("user", "", new ArrayList<>());
+    private final UserDetails userDetails = user;
 
 
     @Test

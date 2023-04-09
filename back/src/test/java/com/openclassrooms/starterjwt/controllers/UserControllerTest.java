@@ -1,6 +1,5 @@
 package com.openclassrooms.starterjwt.controllers;
 
-import com.openclassrooms.starterjwt.mapper.UserMapperImpl;
 import com.openclassrooms.starterjwt.models.User;
 import com.openclassrooms.starterjwt.security.services.UserDetailsImpl;
 import com.openclassrooms.starterjwt.services.UserService;
@@ -12,10 +11,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContext;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.time.LocalDateTime;
@@ -28,8 +23,7 @@ class UserControllerTest {
 
     @MockBean
     private UserService service;
-    @MockBean
-    private Authentication authentication;
+
     @Autowired
     private UserController userController;
 
@@ -40,10 +34,10 @@ class UserControllerTest {
     private final String lastName = "Admin";
     private final String password = "test!1234";
 
-    private User user = new User(id, email, lastName, firstName, password, true,LocalDateTime.now(), LocalDateTime.now());
+    private final User user = new User(id, email, lastName, firstName, password, true,LocalDateTime.now(), LocalDateTime.now());
 
-    private User user2 = new User(1L, email, lastName, firstName, password, true,LocalDateTime.now(), LocalDateTime.now());
-    private UserDetails userDetails = new UserDetailsImpl(id, email, firstName, lastName, true, password);
+    private final User user2 = new User(1L, email, lastName, firstName, password, true,LocalDateTime.now(), LocalDateTime.now());
+    private final UserDetails userDetails = new UserDetailsImpl(id, email, firstName, lastName, true, password);
 
 
     @Test

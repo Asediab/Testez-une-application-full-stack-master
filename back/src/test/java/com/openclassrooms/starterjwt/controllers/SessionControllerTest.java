@@ -11,19 +11,12 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.json.AutoConfigureJsonTesters;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.mock.web.MockHttpServletResponse;
-import org.springframework.test.web.servlet.MockMvc;
 
-import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.*;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -42,18 +35,18 @@ class SessionControllerTest {
     @Autowired
     private SessionController sessionController;
 
-    private final Long id = 1L;
-    private final String email = "yoga@studio.com";
-    private final String firstName = "Admin";
-    private final String lastName = "Admin";
-    private final String password = "test!1234";
     private Session session;
 
     @BeforeEach
     void start() {
-        User user1 = new User(id,email, lastName, firstName, password, false, LocalDateTime.now(), LocalDateTime.now());
-        User user2 = new User(id,email, lastName, firstName, password, false, LocalDateTime.now(), LocalDateTime.now());
-        Teacher teacher = new Teacher(id,lastName, firstName,LocalDateTime.now(),LocalDateTime.now());
+        Long id = 1L;
+        String email = "yoga@yoga.com";
+        String firstName = "Admin";
+        String lastName = "Admin";
+        String password = "test!1234";
+        User user1 = new User(id, email, lastName, firstName, password, false, LocalDateTime.now(), LocalDateTime.now());
+        User user2 = new User(id, email, lastName, firstName, password, false, LocalDateTime.now(), LocalDateTime.now());
+        Teacher teacher = new Teacher(id, lastName, firstName,LocalDateTime.now(),LocalDateTime.now());
         List<User> userList = new ArrayList<>();
         userList.add(user1);
         userList.add(user2);

@@ -124,6 +124,8 @@
 						<exclude>com/openclassrooms/starterjwt/models/**</exclude>
 						<exclude>com/openclassrooms/starterjwt/payload/**</exclude>
 						<exclude>com/openclassrooms/starterjwt/SpringBootSecurityJwtApplication.class</exclude>
+						<exclude>com/openclassrooms/starterjwt/security/services/UserDetailsImpl.class</exclude>
+						<exclude>com/openclassrooms/starterjwt/security/jwt/AuthEntryPointJwt.class</exclude>
 					</excludes>
 				</configuration>
 				<executions>
