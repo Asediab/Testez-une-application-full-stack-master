@@ -11,6 +11,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.time.LocalDateTime;
@@ -23,6 +26,7 @@ class UserControllerTest {
 
     @MockBean
     private UserService service;
+
 
     @Autowired
     private UserController userController;
@@ -95,5 +99,21 @@ class UserControllerTest {
         ResponseEntity<?> response = userController.save("1");
 
         Assertions.assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
+    }
+
+    @Test
+    @DisplayName("Test save")
+    void testSave() {
+        Authentication authentication = mock(Authentication.class);
+        SecurityContext securityContext = mock(SecurityContext.class);
+        when(securityContext.getAuthentication()).thenReturn(authentication);
+        SecurityContextHolder.setContext(securityContext);
+        when(SecurityContextHolder.getContext().getAuthentication().getPrincipal()).thenReturn(userDetails);
+        when(service.findById(1L)).thenReturn(user);
+
+        ResponseEntity<?> response = userController.save("1");
+
+        Assertions.assertEquals(HttpStatus.OK, response.getStatusCode());
+        verify(service, times(1)).delete(1L);
     }
 }

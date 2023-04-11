@@ -19,7 +19,6 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.io.IOException;
-import java.time.LocalDateTime;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
@@ -36,7 +35,6 @@ class UserControllerIT {
     @Autowired
     private MockMvc mvc;
 
-    private String userJson;
     private SignupRequest signupRequest;
     private LoginRequest loginRequest;
 
@@ -51,10 +49,6 @@ class UserControllerIT {
 
     @BeforeAll
     void start() throws IOException {
-        User user = new User(1L,"user@user.com", "User", "Usr", "pass",
-                false, LocalDateTime.now(), LocalDateTime.now());
-        userJson = userJacksonTester.write(user).getJson();
-
         signupRequest = new SignupRequest();
         signupRequest.setFirstName("UserF");
         signupRequest.setLastName("UserL");

@@ -104,6 +104,17 @@ class SessionControllerTest {
     }
 
     @Test
+    @DisplayName("Test create")
+    void testCreate() {
+        when(sessionService.create(any(Session.class))).thenReturn(session);
+
+        ResponseEntity<?> responseEntity = sessionController.create(sessionMapper.toDto(session));
+
+        Assertions.assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
+        Assertions.assertEquals(sessionMapper.toDto(session), responseEntity.getBody());
+    }
+
+    @Test
     @DisplayName("Test update NumberFormatException")
     void testUpdateNumberFormatException() {
         doThrow(NumberFormatException.class).when(sessionService).update(anyLong(), any(Session.class));

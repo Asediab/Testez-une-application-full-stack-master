@@ -1,9 +1,6 @@
 package com.openclassrooms.starterjwt.controllers;
 
 import com.openclassrooms.starterjwt.dto.SessionDto;
-import com.openclassrooms.starterjwt.models.Session;
-import com.openclassrooms.starterjwt.models.Teacher;
-import com.openclassrooms.starterjwt.models.User;
 import com.openclassrooms.starterjwt.repository.SessionRepository;
 import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;

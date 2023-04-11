@@ -1,0 +1,11 @@
+{
+  "id": 3,
+  "name": "Session",
+  "date": "2001-01-01T00:00:00.000+00:00",
+  "teacher_id": 1,
+  "description": "description",
+  "users": [],
+  "createdAt": "2023-03-12T18:29:21",
+  "updatedAt": "2023-03-12T18:29:21"
+}
+

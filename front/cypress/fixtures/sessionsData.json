@@ -1,0 +1,32 @@
+[
+  {
+    "id": 1,
+    "name": "Session",
+    "date": "2021-03-03T00:00:00.000+00:00",
+    "teacher_id": 1,
+    "description": "Description",
+    "users": [],
+    "createdAt": "2023-04-02T14:38:45",
+    "updatedAt": "2023-04-02T15:04:33"
+  },
+  {
+    "id": 2,
+    "name": "Session2",
+    "date": "2021-03-02T00:00:00.000+00:00",
+    "teacher_id": 2,
+    "description": "Description2",
+    "users": [],
+    "createdAt": "2023-04-02T15:06:40",
+    "updatedAt": "2023-04-02T16:06:40"
+  },
+  {
+    "id": 3,
+    "name": "Session3",
+    "date": "2021-03-02T00:00:00.000+00:00",
+    "teacher_id": 3,
+    "description": "Description3",
+    "users": [],
+    "createdAt": "2023-04-02T16:06:40",
+    "updatedAt": "2023-04-02T17:06:40"
+  }
+]
