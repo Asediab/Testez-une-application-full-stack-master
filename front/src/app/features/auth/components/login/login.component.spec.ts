@@ -11,15 +11,19 @@ import { expect } from '@jest/globals';
 import { SessionService } from 'src/app/services/session.service';
 
 import { LoginComponent } from './login.component';
+import {AuthService} from "../../services/auth.service";
 
 describe('LoginComponent', () => {
   let component: LoginComponent;
   let fixture: ComponentFixture<LoginComponent>;
+  let authService: AuthService;
+  let sessionService: SessionService;
+  let router: RouterTestingModule;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [LoginComponent],
-      providers: [SessionService],
+      providers: [SessionService, AuthService, RouterTestingModule],
       imports: [
         RouterTestingModule,
         BrowserAnimationsModule,
